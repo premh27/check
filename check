@@ -1,0 +1,10 @@
+mkdir healthcheck
+cd healthcheck
+docker ps -a
+
+docker container run --name pg1 -e POSTGRES_PASSWORD=mypassword -d postgres
+docker ps -a
+
+docker container run --name psg2 -e POSTGRES_PASSWORD=mypassword --health-cmd="pg_isready -u postgres || exit" -d postgres
+
+docker ps -a
